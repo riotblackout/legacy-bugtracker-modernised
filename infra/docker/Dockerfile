@@ -27,7 +27,7 @@ WORKDIR C:/inetpub/wwwroot
 RUN Remove-Item -Recurse -Force * 2>$null
 
 # Copy published site from build stage
-COPY --from=build C:\out\ .
+COPY --from=build C:/src/src/BugTracker.Web/obj/Release/Package/PackageTmp/ .
 
 # Ensure App_Data folders exist
 RUN mkdir C:\inetpub\wwwroot\App_Data\logs
