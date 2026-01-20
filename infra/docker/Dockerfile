@@ -4,7 +4,7 @@
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2022 AS build
 SHELL ["powershell", "-Command", "$ErrorActionPreference='Stop'; $ProgressPreference='SilentlyContinue';"]
 
-WORKDIR C:\src
+WORKDIR C:/src
 
 # Copy entire repo (or limit later for speed)
 COPY . .
@@ -21,7 +21,7 @@ RUN msbuild .\src\BugTracker.Web\BugTracker.Web.csproj /p:Configuration=Release 
 FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2022
 SHELL ["powershell", "-Command", "$ErrorActionPreference='Stop'; $ProgressPreference='SilentlyContinue';"]
 
-WORKDIR C:\inetpub\wwwroot
+WORKDIR C:/inetpub/wwwroot
 
 # Clean default IIS site content
 RUN Remove-Item -Recurse -Force * 2>$null
