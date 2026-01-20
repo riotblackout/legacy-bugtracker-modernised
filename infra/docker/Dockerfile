@@ -29,8 +29,9 @@ RUN Remove-Item -Recurse -Force * 2>$null
 # Copy published site from build stage
 COPY --from=build C:\out\ .
 
-# (Optional) Ensure App_Data folders exist
-RUN New-Item -ItemType Directory -Force -Path C:\inetpub\wwwroot\App_Data\logs | Out-Null; `
-    New-Item -ItemType Directory -Force -Path C:\inetpub\wwwroot\App_Data\uploads | Out-Null
+# Ensure App_Data folders exist
+RUN mkdir C:\inetpub\wwwroot\App_Data\logs
+RUN mkdir C:\inetpub\wwwroot\App_Data\uploads
+
 
 EXPOSE 80
