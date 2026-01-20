@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  btnet-web:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      # You will wire this properly later; placeholder for now
+      - BTN_DATABASE=btnet
+    depends_on:
+      - sql
+
+  sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong!Passw0rd
+    ports:
+      - "1433:1433"
