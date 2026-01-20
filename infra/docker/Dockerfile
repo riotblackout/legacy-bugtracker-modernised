@@ -13,11 +13,8 @@ COPY . .
 RUN nuget restore .\src\BugTracker.NET.sln
 
 # Build the web project
-RUN msbuild .\src\BugTracker.Web\BugTracker.Web.csproj `
-    /p:Configuration=Release `
-    /p:DeployOnBuild=true `
-    /p:WebPublishMethod=FileSystem `
-    /p:publishUrl=C:\out
+RUN msbuild .\src\BugTracker.Web\BugTracker.Web.csproj /p:Configuration=Release /p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:publishUrl=C:\out
+
 
 # -----------------------------
 
