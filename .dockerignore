@@ -8,3 +8,16 @@
 **/packages/
 .git/
 docs/
+
+# Don’t send database project into docker build context
+src/BugTracker.Database/
+
+# SSDT / VS locks & build outputs
+**/*.dbmdl
+**/*.jfm
+**/*.cache
+**/*.suo
+**/*.user
+**/*.vs/
+**/bin/
+**/obj/

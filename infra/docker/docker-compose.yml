@@ -5,3 +5,5 @@ services:
       dockerfile: infra/docker/Dockerfile
     ports:
       - "8080:80"
+    environment:
+      BTN_CONNECTION_STRING: "Server=host.docker.internal,1433;Database=btnet;User Id=btnet_user;Password=Btnet123!;TrustServerCertificate=True;"
