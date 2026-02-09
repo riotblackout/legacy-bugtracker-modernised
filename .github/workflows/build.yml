@@ -1,8 +1,33 @@
-- name: Build Web Project
-  run: msbuild src/BugTracker.Web/BugTracker.Web.csproj /p:Configuration=Release /p:Platform="Any CPU"
+name: Build
 
-- name: Build Windows Service
-  run: msbuild src/btnet_service/btnet_service.csproj /p:Configuration=Release /p:Platform="Any CPU"
+on:
+  push:
+    branches: [ main ]
+  pull_request:
 
-- name: Build Console App
-  run: msbuild src/btnet_service/btnet_console.csproj /p:Configuration=Release /p:Platform="Any CPU"
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
+
+    - name: Restore NuGet packages
+      run: nuget restore src/BugTracker.NET.sln
+
+    # 🔥 Build ONLY what we actually need
+    - name: Build Web Project
+      run: msbuild src/BugTracker.Web/BugTracker.Web.csproj /p:Configuration=Release /p:Platform="Any CPU"
+
+    - name: Build Windows Service
+      run: msbuild src/btnet_service/btnet_service.csproj /p:Configuration=Release /p:Platform="Any CPU"
+
+    - name: Build Console App
+      run: msbuild src/btnet_service/btnet_console.csproj /p:Configuration=Release /p:Platform="Any CPU"
